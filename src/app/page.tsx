@@ -59,8 +59,13 @@ const Page = () => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  const updateLocalStorage = () => {
+  useEffect(() => {
+    // Save counter to localStorage whenever it changes
     localStorage.setItem('counter', counter.toString());
+  }, [counter]);
+
+  const updateLocalStorage = () => {
+    localStorage.setItem('universaldate', universalDate.toString());
     localStorage.setItem('streakCounter', streakCounter.toString());
     localStorage.setItem('missedDays', JSON.stringify(missedDays));
   };
