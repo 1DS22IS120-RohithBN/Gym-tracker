@@ -133,44 +133,44 @@ const Page = () => {
   }, [missedDays]);
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen bg-gradient-to-b from-black to-gray-900'>
-      <div className='flex flex-col justify-center items-center text-center p-6 m-4 bg-white rounded-2xl shadow-lg w-full max-w-md'>
-        <h1 className='text-4xl font-bold text-gray-800 mt-4'>Gym Tracker</h1>
-        <div className='text-2xl text-gray-800 mt-5'>{today}</div>
-        <div className='flex gap-4 mt-8'>
-          <button className='bg-green-500 text-white shadow-md p-2 w-28 rounded-lg hover:bg-green-600 transition duration-200'
-            onClick={() => handleCounter("attended")}
-          >
-            Attended
-          </button>
-          <button className='bg-red-500 text-white shadow-md p-2 w-28 rounded-lg hover:bg-red-600 transition duration-200'
-            onClick={() => handleCounter("missed")}
-          >
-            Missed
-          </button>
-        </div>
-        <div className='text-4xl text-gray-800 mt-12'>Counter={counter}/{getDaysInMonth(day.getMonth(), day.getUTCFullYear())}</div>
-        <div className='text-3xl text-gray-800 mt-12'>Streak Counter 🔥={streakCounter}</div>
-        <Table className='mt-10 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden'>
-          <TableCaption>All of your missed days:</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-1/2 p-4 bg-gray-200 text-left">Day</TableHead>
-              <TableHead className='w-1/2 p-4 bg-gray-200 text-left'>Date</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {missedDays.map((missedDay, index) => (
-              <TableRow key={index}>
-                <TableCell className="font-medium p-4 border-b">{missedDay.dayName}</TableCell>
-                <TableCell className="p-4 border-b">{missedDay.date}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+    <div className='flex flex-col justify-center items-center h-screen bg-gradient-to-b from-black to-gray-900 p-4'>
+    <div className='flex flex-col justify-center items-center text-center p-6 bg-white rounded-2xl shadow-lg w-full max-w-sm mx-auto'>
+      <h1 className='text-3xl font-bold text-gray-800 mt-4'>Gym Tracker</h1>
+      <div className='text-xl text-gray-800 mt-5'>{today}</div>
+      <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+        <button className='bg-green-500 text-white shadow-md p-2 w-full sm:w-28 rounded-lg hover:bg-green-600 transition duration-200'
+          onClick={() => handleCounter("attended")}
+        >
+          Attended
+        </button>
+        <button className='bg-red-500 text-white shadow-md p-2 w-full sm:w-28 rounded-lg hover:bg-red-600 transition duration-200'
+          onClick={() => handleCounter("missed")}
+        >
+          Missed
+        </button>
       </div>
+      <div className='text-2xl text-gray-800 mt-12'>Counter={counter}/{getDaysInMonth(day.getMonth(), day.getUTCFullYear())}</div>
+      <div className='text-xl text-gray-800 mt-12'>Streak Counter 🔥={streakCounter}</div>
+      <Table className='mt-10 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden'>
+        <TableCaption>All of your missed days:</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-1/2 p-4 bg-gray-200 text-left">Day</TableHead>
+            <TableHead className='w-1/2 p-4 bg-gray-200 text-left'>Date</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {missedDays.map((missedDay, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium p-4 border-b">{missedDay.dayName}</TableCell>
+              <TableCell className="p-4 border-b">{missedDay.date}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
-  );
+  </div>
+  );  
 };
 
 export default Page;
