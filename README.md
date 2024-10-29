@@ -24,10 +24,12 @@ Gym Tracker is a web application designed to help users keep track of their gym 
 
 1. Clone the repository:
    ```git clone https://github.com/yourusername/gym-tracker.git```
-   <br>
+
    ```cd gym-tracker```
 Install the dependencies:
-<br>
+
 ```npm install```
+
 Start the development server:
+
 ```npm run dev```
