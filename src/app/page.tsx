@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -28,7 +28,7 @@ const days: { [key: number]: string } = {
 
 const Page = () => {
   const { toast } = useToast();
-  const day = new Date();
+  const day = useMemo(() => new Date(), []);
   const [universalDate, setUniversalDate] = useState(0);
   const [attendedCountDay, setAttendedCountDate] = useState(0);
   const [today, setToday] = useState("");
@@ -53,7 +53,7 @@ const Page = () => {
         setMissedDays(parsedMissedDays);
       }
     }
-  }, []);
+  }, [day]);
 
   const getDaysInMonth = (month: number, year: number) => {
     return new Date(year, month + 1, 0).getDate();
