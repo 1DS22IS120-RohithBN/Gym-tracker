@@ -43,6 +43,7 @@ const Page = () => {
     // Load saved data from local storage
     const savedCounter = localStorage.getItem('counter');
     const savedStreak = localStorage.getItem('streakCounter');
+    console.log("saved streak",savedStreak)
     const savedMissedDays = localStorage.getItem('missedDays');
     const lastActionDate = localStorage.getItem('lastActionDate');
 
@@ -74,8 +75,11 @@ const Page = () => {
     localStorage.setItem('counter', counter.toString());
   }, [counter]);
 
-  const updateLocalStorage = (newMissedDays: MissedDays[]) => {
+  useEffect(() => {
     localStorage.setItem('streakCounter', streakCounter.toString());
+  }, [streakCounter]);
+
+  const updateLocalStorage = (newMissedDays: MissedDays[]) => {
     localStorage.setItem('missedDays', JSON.stringify(newMissedDays));
     localStorage.setItem('lastActionDate', todayString); // Store today's date
   };
@@ -96,10 +100,11 @@ const Page = () => {
         return newCounter;
       });
       setStreakCounter(prev => {
-        const newStreak = prev + 1;
-        updateLocalStorage(missedDays);
+        const newStreak = prev + 1; // Increment streak
+        localStorage.setItem('streakCounter', newStreak.toString()); // Save immediately
         return newStreak;
       });
+      updateLocalStorage(missedDays);
     } else if (action === 'missed') {
       const isMissedDayExists = missedDays.some(missedDay => missedDay.date === todayString);
       if (!isMissedDayExists) {
@@ -112,6 +117,7 @@ const Page = () => {
         ];
         setMissedDays(newMissedDays);
         updateLocalStorage(newMissedDays);
+        localStorage.setItem('streakCounter', '0');
         setStreakCounter(0); // Reset streak on missed day
         toast({
           title: "You have missed the gym on " + todayString
@@ -128,7 +134,7 @@ const Page = () => {
     <div className='flex flex-col justify-center items-center h-screen bg-gradient-to-b from-black to-gray-900 p-4'>
       <div className='flex flex-col justify-center items-center text-center p-6 bg-white rounded-2xl shadow-lg w-full max-w-sm mx-auto'>
         <h1 className='text-3xl font-bold text-gray-800 mt-4'>Gym Tracker</h1>
-        <div className='text-xl text-gray-800 mt-5'>{todayString}</div>
+        <div className='text-xl text-gray-800 mt-5'>{days[day.getDay()]}</div>
         <div className='flex flex-col sm:flex-row gap-4 mt-8'>
           <button className='bg-green-500 text-white shadow-md p-2 w-full sm:w-28 rounded-lg hover:bg-green-600 transition duration-200'
             onClick={() => handleCounter("attended")}
